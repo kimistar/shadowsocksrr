@@ -41,6 +41,12 @@ except:
 
 SWEEP_MAX_ITEMS = 1024
 
+# https://stackoverflow.com/questions/70943244/attributeerror-module-collections-has-no-attribute-mutablemapping
+import sys
+if sys.version_info.major == 3 and sys.version_info.minor >= 10:
+    import collections
+    setattr(collections, "MutableMapping", collections.abc.MutableMapping)
+
 class LRUCache(collections.MutableMapping):
     """This class is not thread safe"""
 
